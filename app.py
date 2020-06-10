@@ -92,6 +92,20 @@ def create_app(test_config=None):
         except Exception:
             abort(422)
 
+    #  Movies
+    #  ----------------------------------------------------------------
+
+    # An endpoint to GET all movies
+    @app.route('/movies')
+    def get_movies():
+        movies = Movie.query.all()
+        formatted_movies = [movie.format() for movie in movies]
+
+        return jsonify({
+            'success': True,
+            'movies': formatted_movies
+        }), 200
+
     return app
 
 
