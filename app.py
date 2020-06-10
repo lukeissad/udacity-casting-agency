@@ -106,6 +106,26 @@ def create_app(test_config=None):
             'movies': formatted_movies
         }), 200
 
+    # An endpoint to POST new movies
+    @app.route('/movies', methods=['POST'])
+    def post_movie():
+        body = request.get_json()
+
+        id = body.get('id', None)
+        title = body.get('title', None)
+        release_date = body.get('release_date', None)
+
+        try:
+            movie = Movie(id=id, title=title, release_date=release_date)
+            movie.insert()
+
+            return jsonify({
+                'success': True,
+                'movie': movie.format()
+            }), 201
+        except Exception:
+            abort(422)
+
     return app
 
 
