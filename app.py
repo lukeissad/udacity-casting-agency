@@ -26,6 +26,27 @@ def create_app(test_config=None):
             'actors': formatted_actors
         }), 200
 
+    # An endpoint to POST new actors
+    @app.route('/actors', methods=['POST'])
+    def post_actor():
+        body = request.get_json()
+
+        id = body.get('id', None)
+        name = body.get('name', None)
+        age = body.get('age', None)
+        gender = body.get('gender', None)
+
+        try:
+            actor = Actor(id=id, name=name, age=age, gender=gender)
+            actor.insert()
+
+            return jsonify({
+                'success': True,
+                'actor': actor.format()
+            }), 201
+        except Exception:
+            abort(422)
+
     return app
 
 
