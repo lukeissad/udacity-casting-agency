@@ -47,6 +47,33 @@ def create_app(test_config=None):
         except Exception:
             abort(422)
 
+    # An endpoint to PATCH an actor by id
+    @app.route('/actors/<int:actor_id>', methods=['PATCH'])
+    def patch_actor(actor_id):
+        body = request.get_json()
+
+        try:
+            actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
+
+            if actor is None:
+                abort(404)
+
+            if 'name' in body:
+                actor.name = body.get('name')
+            if 'age' in body:
+                actor.age = int(body.get('age'))
+            if 'gender' in body:
+                actor.gender = body.get('gender')
+
+            actor.update()
+
+            return jsonify({
+                'success': True,
+                'actor': actor.format()
+            }), 200
+        except Exception:
+            abort(400)
+
     return app
 
 
