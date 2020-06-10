@@ -74,6 +74,24 @@ def create_app(test_config=None):
         except Exception:
             abort(400)
 
+    # An endpoint to DELETE an actor by id
+    @app.route('/actors/<int:actor_id>', methods=['DELETE'])
+    def delete_actor(actor_id):
+        try:
+            actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
+
+            if actor is None:
+                abort(404)
+
+            actor.delete()
+
+            return jsonify({
+                'success': True,
+                'deleted': actor_id
+            }), 200
+        except Exception:
+            abort(422)
+
     return app
 
 
