@@ -12,6 +12,20 @@ def create_app(test_config=None):
     setup_db(app)
     CORS(app)
 
+    #  Actors
+    #  ----------------------------------------------------------------
+
+    # An endpoint to GET all actors
+    @app.route('/actors')
+    def get_actors():
+        actors = Actor.query.all()
+        formatted_actors = [actor.format() for actor in actors]
+
+        return jsonify({
+            'success': True,
+            'actors': formatted_actors
+        }), 200
+
     return app
 
 
