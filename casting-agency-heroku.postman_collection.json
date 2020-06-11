@@ -1,0 +1,1045 @@
+{
+	"info": {
+		"_postman_id": "9b41a26a-9b55-49a2-b928-bd868351f39b",
+		"name": "casting-agency-heroku",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "casting assistant",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9c409821-e0ac-4c85-912e-bc574c50e90e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Value contains actors array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.actors).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8596439-cb21-4d91-aece-4a3fefbd9f9a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Value contains movies array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.movies).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4c4d7034-1671-48e5-b2bc-f5f4034562a4",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 50,\n\t\"name\": \"Anthony Hopkins\",\n\t\"age\": 82,\n\t\"gender\": \"male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6432c3a9-3cee-44aa-8dd4-cd2d16429789",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 50,\n\t\"title\": \"The Silence of the Lambs\",\n\t\"release_date\": \"02/14/1991\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ef40a21b-4235-4da1-aeac-e31f160a7146",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Meryl Streep\",\n\t\"age\": 70,\n\t\"gender\": \"female\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "098d7779-1fd1-45e0-9d7d-aca6c2f7e3de",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"The Devil Wears Prada\",\n\t\"release_date\": \"06/30/2006\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "037c2d68-c328-4250-a2e0-ba42f25a44ab",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fba85b27-334b-4a8b-aece-9a44c0774dcd",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"50"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Can view actors and movies.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkVPNGoxUVpIaHFkeW5uSzFSdmRmViJ9.eyJpc3MiOiJodHRwczovL2FnZW5jeWZzbmQuZXUuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVlZGVlOTY5NGU0NmE5MDAxM2MzMjBlMiIsImF1ZCI6IkFnZW5jeSIsImlhdCI6MTU5MTkxNTY3MywiZXhwIjoxNTkyMDAyMDczLCJhenAiOiJZZ2VVTFl3b3VmZUxTcW5zWXV2VlphdFBYQkhKYnNtMiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0OmFjdG9ycyIsImdldDptb3ZpZXMiXX0.hv_wQePXNT0GSgmS-1evJABmOw22ezvgx4Dt0smpSKJDaDGBpV_Kuw-258gDM7lSXB_Ptjwbzvn6zpT5ga33klRq5xzFEge5Bl3tKxcLZpjeFdfcWTFsI6Vjb0ziPZlbmOPB_GTrFBCBfB9biQCCR3qPjbDZpjl1rmy9g_H3ZonuI7BYGp-1JGDqYgpswnP9BPSTkRR-H_R--YOzJ9YNfDhhOJ6Cwg6TZkwCWNWh_dQe831tLBIVNSmI4XPygMC0E5w-zH2VEv5Ag1dm6uIsWSN35Y9GOG0_8MCXZ6HnT3pW48SnB4KgS1j8N6817MuYFIErrJq6niIfa2gfJaFcYg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6fc4c68a-0ee8-43bf-b7bd-b055c6bc0bcf",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d2036a1-4bfe-4cb4-8c34-13aafac40fe5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "casting director",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "70a660ec-73d8-4a18-a3a4-fea7c5f269c4",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Value contains actors array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.actors).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "10e0cf62-74f3-44c9-b4e2-57150ea156f3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Value contains movies array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.movies).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4781f3ca-6be0-4252-86f3-560418afb485",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 50,\n\t\"name\": \"Anthony Hopkins\",\n\t\"age\": 82,\n\t\"gender\": \"male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae8406d6-fbcc-46ce-a21c-8d43a1c56f7a",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 50,\n\t\"title\": \"The Silence of the Lambs\",\n\t\"release_date\": \"02/14/1991\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90d8e813-3a3f-457e-8d30-ff2d78876bcc",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Meryl Streep\",\n\t\"age\": 70,\n\t\"gender\": \"female\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/60",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8645926-36d6-418b-8f9b-48d70d620e64",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"The Devil Wears Prada\",\n\t\"release_date\": \"06/30/2006\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/60",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"60"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ee8944bb-7cd6-4f43-8b54-14c090c23641",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "82118aaa-9e24-4c3c-aa89-b375239b87d5",
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"50"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Can view, add, delete and modify actors and modify movies.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkVPNGoxUVpIaHFkeW5uSzFSdmRmViJ9.eyJpc3MiOiJodHRwczovL2FnZW5jeWZzbmQuZXUuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVlZGVlYTM2Zjg3YTJhMDAxOTljZmIyZiIsImF1ZCI6IkFnZW5jeSIsImlhdCI6MTU5MTkxNTk3MCwiZXhwIjoxNTkyMDAyMzcwLCJhenAiOiJZZ2VVTFl3b3VmZUxTcW5zWXV2VlphdFBYQkhKYnNtMiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIiwicGF0Y2g6YWN0b3JzIiwicGF0Y2g6bW92aWVzIiwicG9zdDphY3RvcnMiXX0.NBcVKeQxzU7jvJ_Nh--6mcmV5xPpB_9S20z-QiwC9ELVyodeZQ3nQ6FbPzJ0qhyKALquFccQQH_pxotXP5lvQpeQXWUaKVTRJ1LD5EyBLMk_cOo1xSnlsnO-JGD4EUhdiwF11dorAN-QCgbBOZ3OgtGtxwddBSw1u2UTJIJ4fkUrgm8RWacHR-HyGydXvB5WWPx3I7qOaYvL6jlytByfYVaVp5L8Osd6ku69vVTATakrw-wj18QFRTxRvimv6wuj1nd6kyGQEy-ep92zzQxq9s9sbKfyLrULKsawlf-CDC6ob41jHLe0Gwpi_OSxOMV2WwSdtiQDEGf6iUTvte3UWA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e1d9e93f-8ab6-46bf-b70c-4a3dbcbdf024",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "944899b8-e0cf-42f4-9feb-19a5f79bcfec",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "executive producer",
+			"item": [
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fbed3a00-e4f9-423c-867a-b1bf3eddb1be",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Value contains actors array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.actors).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6668f73a-6a31-4e79-8d4b-23ec8dbc9409",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Value contains movies array\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.movies).to.be.an('array')\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d7ffd330-4029-4917-980a-32ad8d730f43",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 50,\n\t\"name\": \"Anthony Hopkins\",\n\t\"age\": 82,\n\t\"gender\": \"male\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1fbc277b-ddbf-4ca4-8df0-34c7b629ed1e",
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201,202]);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": 50,\n\t\"title\": \"The Silence of the Lambs\",\n\t\"release_date\": \"02/14/1991\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b659fad8-3fe8-4940-a426-15ec795f1c0b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Meryl Streep\",\n\t\"age\": 70,\n\t\"gender\": \"female\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/actors/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b595472-47c8-4056-b345-c1ab9835a741",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"The Devil Wears Prada\",\n\t\"release_date\": \"06/30/2006\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/actors/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e939c771-9f5d-4b4c-8012-bd842efbdc2c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/actors/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"actors",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/movies/50",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8c915b63-f9a1-4ba4-9d64-0e7be1e35c67",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/movies/50",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"50"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Can view, add, delete and modify actors and movies.",
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkVPNGoxUVpIaHFkeW5uSzFSdmRmViJ9.eyJpc3MiOiJodHRwczovL2FnZW5jeWZzbmQuZXUuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDVlZGQ5ZjdkZjg3YTJhMDAxOTliYTI0NCIsImF1ZCI6IkFnZW5jeSIsImlhdCI6MTU5MTkxNjE2OCwiZXhwIjoxNTkyMDAyNTY4LCJhenAiOiJZZ2VVTFl3b3VmZUxTcW5zWXV2VlphdFBYQkhKYnNtMiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmFjdG9ycyIsImRlbGV0ZTptb3ZpZXMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIiwicG9zdDptb3ZpZXMiXX0.k-pvR5WfJ5qpdMBtN2uPt97kju7z6pN5A9j1P975hShi3VXuxXSxdxpLJxPGt8a6upxlEXfk7iwm5vsI9qcwBXuoEXb0zkp7afjDyRCxF2UY33xlPk9oE92al90MD62a-EGa4NsSUHhz7xOZkTxoJjMeTJLckz_Dl-k1hzIZdKQgImCcV4qSA3SYon0fW6mVtX9AtpXohPwPzM0YrfyS6ZKGbb3BGBVpfDHVOpVfETRzpFUEMYnAIdv9f6O6ii-vwv5bIWbOvDMyuSU-T59DkoXYN0eVlEZ14cAokpWNtb8OTfpO1hqYNzQQixGBX-r7wYdjLdGzo5oYy1nGTxDfTQ",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "a44106cc-2da6-46ed-aaf5-5d06078defb5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "94b4c17d-8605-4d27-99e5-d270a1b64309",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d4d06b7e-41bf-448e-a3a1-c774df6c2b93",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6b66a7e8-b691-494a-a6d5-eff34d6bd609",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f314f012-087a-4f98-acab-e8f7ebc2718e",
+			"key": "host",
+			"value": "https://agencyfsnd.herokuapp.com",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
