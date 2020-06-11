@@ -126,6 +126,31 @@ def create_app(test_config=None):
         except Exception:
             abort(422)
 
+    # An endpoint to PATCH a movie by id
+    @app.route('/movies/<int:movie_id>', methods=['PATCH'])
+    def patch_movie(movie_id):
+        body = request.get_json()
+
+        try:
+            movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
+
+            if movie is None:
+                abort(404)
+
+            if 'title' in body:
+                movie.title = body.get('title')
+            if 'release_date' in body:
+                movie.release_date = body.get('release_date')
+
+            movie.update()
+
+            return jsonify({
+                'success': True,
+                'movie': movie.format()
+            }), 200
+        except Exception:
+            abort(400)
+
     return app
 
 
