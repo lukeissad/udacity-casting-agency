@@ -3,6 +3,7 @@ from flask import Flask, request, abort, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
+from auth import AuthError, requires_auth
 from models import setup_db, Actor, Movie
 
 
@@ -17,7 +18,8 @@ def create_app(test_config=None):
 
     # An endpoint to GET all actors
     @app.route('/actors')
-    def get_actors():
+    @requires_auth('get:actors')
+    def get_actors(jwt):
         actors = Actor.query.all()
         formatted_actors = [actor.format() for actor in actors]
 
@@ -28,7 +30,8 @@ def create_app(test_config=None):
 
     # An endpoint to POST new actors
     @app.route('/actors', methods=['POST'])
-    def post_actor():
+    @requires_auth('post:actors')
+    def post_actor(jwt):
         body = request.get_json()
 
         id = body.get('id', None)
@@ -49,7 +52,8 @@ def create_app(test_config=None):
 
     # An endpoint to PATCH an actor by id
     @app.route('/actors/<int:actor_id>', methods=['PATCH'])
-    def patch_actor(actor_id):
+    @requires_auth('patch:actors')
+    def patch_actor(jwt, actor_id):
         body = request.get_json()
 
         try:
@@ -76,7 +80,8 @@ def create_app(test_config=None):
 
     # An endpoint to DELETE an actor by id
     @app.route('/actors/<int:actor_id>', methods=['DELETE'])
-    def delete_actor(actor_id):
+    @requires_auth('delete:actors')
+    def delete_actor(jwt, actor_id):
         try:
             actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
 
@@ -97,7 +102,8 @@ def create_app(test_config=None):
 
     # An endpoint to GET all movies
     @app.route('/movies')
-    def get_movies():
+    @requires_auth('get:movies')
+    def get_movies(jwt):
         movies = Movie.query.all()
         formatted_movies = [movie.format() for movie in movies]
 
@@ -108,7 +114,8 @@ def create_app(test_config=None):
 
     # An endpoint to POST new movies
     @app.route('/movies', methods=['POST'])
-    def post_movie():
+    @requires_auth('post:movies')
+    def post_movie(jwt):
         body = request.get_json()
 
         id = body.get('id', None)
@@ -128,7 +135,8 @@ def create_app(test_config=None):
 
     # An endpoint to PATCH a movie by id
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
-    def patch_movie(movie_id):
+    @requires_auth('patch:movies')
+    def patch_movie(jwt, movie_id):
         body = request.get_json()
 
         try:
@@ -153,7 +161,8 @@ def create_app(test_config=None):
 
     # An endpoint to DELETE a movie by id
     @app.route('/movies/<int:movie_id>', methods=['DELETE'])
-    def delete_movie(movie_id):
+    @requires_auth('delete:movies')
+    def delete_movie(jwt, movie_id):
         try:
             movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
 
